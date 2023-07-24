@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Timer</title>
+  <style>
+    html,
+    body {
+      margin: 0;
+      padding: 0;
+      height: -webkit-fill-available;
+    }
+
+    .container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: inherit;
+      color: red;
+      background: black;
+      font-family: Consolas;
+      font-style: italic;
+    }
+
+    .container>div {
+      font-size: 10rem;
+    }
+
+    .container>div:nth-child(7) {
+      font-size: 7rem;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="arrow">HH</div>
+    <div class="divider">:</div>
+    <div class="arrow">MM</div>
+    <div class="divider">:</div>
+    <div class="arrow">SS</div>
+    <div class="dot">.</div>
+    <div class="arrow">XX</div>
+  </div>
+  <script>
+    function setTime() {
+        var now = new Date();
+        var time = [];
+        var arrows = document.querySelectorAll('.arrow');
+        var dividers = document.querySelectorAll('.divider');
+
+        time.push(now.getHours());
+        time.push(now.getMinutes());
+        time.push(now.getSeconds());
+        time.push(Math.floor(now.getMilliseconds() / 10));
+
+        time = time.map(elem => elem < 10 ? '0' + elem : elem);
+
+        for (var index = 0; index < arrows.length; index++) {
+          arrows[index].innerHTML = time[index];
+        }
+
+        dividers.forEach(elem => {
+          if (time[3] < 50) {
+            elem.style.color = 'black';
+          } else {
+            elem.style.color = 'red';
+          }
+        });
+      }
+
+      setInterval(setTime, 10);
+  </script>
+</body>
+
+</html>
