@@ -45,10 +45,6 @@
       text-align: center;
     }
 
-    .black {
-      color: black !important;
-    }
-
     .divider-day {
       margin-right: 1rem;
     }
@@ -102,11 +98,17 @@
       }
 
       dividers.forEach(elem => {
-        if (time[3] < 50) 
-          elem.classList.add('black');
-        else
-          elem.classList.remove('black');
+        if (time[3] < 50) inlineBlack(elem);
+        else elem.style.color = '';
       });
+
+      /* ちょっと腹たつダークリーダカーラ改造 */
+      const blacks = document.querySelectorAll(".black");
+      blacks.forEach(black => inlineBlack(black));
+    }
+
+    function inlineBlack(element) {
+      element.style.setProperty('color', 'black', 'important');
     }
 
     function advice() {
