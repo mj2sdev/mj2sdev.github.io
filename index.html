@@ -45,8 +45,8 @@
       text-align: center;
     }
 
-    .advice {
-      color: black;
+    .black {
+      color: black !important;
     }
 
     .divider-day {
@@ -69,7 +69,7 @@
       <div class="dot">.</div>
       <div class="arrow milliseconds">00</div>
     </div>
-    <div class="advice"></div>
+    <div class="advice black"></div>
   </div>
   <script>
     function setTime() {
@@ -102,11 +102,10 @@
       }
 
       dividers.forEach(elem => {
-        if (time[3] < 50) {
-          elem.style.color = 'black';
-        } else {
-          elem.style.color = 'red';
-        }
+        if (time[3] < 50) 
+          elem.classList.add('black');
+        else
+          elem.classList.remove('black');
       });
     }
 
