@@ -6,126 +6,29 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Timer</title>
-  <style>
-    html,
-    body {
-      font-size: 1vw;
-      margin: 0;
-      padding: 0;
-      height: -webkit-fill-available;
-    }
-
-    .timer {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .timer div {
-      font-size: 8rem;
-    }
-
-    .timer div.milliseconds {
-      font-size: 6rem;
-    }
-
-    .container {
-      display: flex;
-      height: inherit;
-      align-items: center;
-      justify-content: center;
-      flex-direction: column;
-      color: red;
-      background: black;
-      font-family: Consolas;
-      font-style: italic;
-    }
-
-    .title {
-      font-size: 5rem;
-      text-align: center;
-    }
-
-    .divider-day {
-      margin-right: 1rem;
-    }
-  </style>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/vue@3/dist/vue.global.prod.js"></script>
+  <script defer src="index.js"></script>
+  <link rel="stylesheet" href="index.css">
 </head>
 
 <body>
-  <div class="container">
-    <div class="title">JLPT 試験<br>受けるまであと</div>
-    <div class="timer">
-      <div class="day">0</div>
-      <div class="divider-day">日</div>
-      <div class="arrow">00</div>
-      <div class="divider">:</div>
-      <div class="arrow">00</div>
-      <div class="divider">:</div>
-      <div class="arrow">00</div>
-      <div class="dot">.</div>
-      <div class="arrow milliseconds">00</div>
+  <div class="flex flex-col h-dvh text-center justify-center items-center bg-black">
+    <div class=" text-red-600 font-monospace font-[monospace] italic text-8xl">
+      <div class="">JLPT 試験<br>受けるまであと</div>
+      <div class="flex gap-2">
+        <div class="day">{{ day }}</div>
+        <div>日</div>
+        <div>{{ hour }}</div>
+        <div class="divider">:</div>
+        <div>{{ minute }}</div>
+        <div class="divider">:</div>
+        <div>{{ second }}</div>
+        <div>.</div>
+        <div>{{ milli }}</div>
+      </div>
     </div>
-    <div class="advice black"></div>
   </div>
-  <script>
-    function setTime() {
-      const ONE_HOUR = 60 * 60 * 1000;
-      const ONE_DAY = 24 * ONE_HOUR;
-      const KOR_GAP = (9 * ONE_HOUR);
-      const D_DAY = new Date("2025-07-06 10:00:00");
-      const NOW = new Date().getTime() + (9 * ONE_HOUR);
-      const gap = D_DAY - NOW;
-      const day = Math.floor((gap + KOR_GAP) / ONE_DAY);
-      if (gap + KOR_GAP < 0) return clearInterval(interval);
-
-      var nokori = new Date(D_DAY - NOW);
-      var time = [];
-      var arrows = document.querySelectorAll('.arrow');
-      var dividers = document.querySelectorAll('.divider');
-      const dayContainer = document.querySelector(".day");
-
-      dayContainer.innerHTML = day;
-
-      time.push(nokori.getHours());
-      time.push(nokori.getMinutes());
-      time.push(nokori.getSeconds());
-      time.push(Math.floor(nokori.getMilliseconds() / 10));
-
-      time = time.map(elem => elem < 10 ? '0' + elem : elem);
-
-      for (var index = 0; index < arrows.length; index++) {
-        arrows[index].innerHTML = time[index];
-      }
-
-      dividers.forEach(elem => {
-        if (time[3] < 50) inlineBlack(elem);
-        else elem.style.color = '';
-      });
-
-      /* ちょっと腹たつダークリーダカーラ改造 */
-      const blacks = document.querySelectorAll(".black");
-      blacks.forEach(black => inlineBlack(black));
-    }
-
-    function inlineBlack(element) {
-      element.style.setProperty('color', 'black', 'important');
-    }
-
-    function advice() {
-      const advice = document.querySelector(".advice");
-      const advices = [
-        "早く勉強した方がいいと思う",
-        "貴方ならきっとできるさ",
-        "絶対合格しましょう"
-      ]
-
-      const random = Math.floor(Math.random() * advices.length);
-      advice.innerHTML = advices[random];
-    }
-    advice();
-    const interval = setInterval(setTime, 10);
-  </script>
 </body>
-
+  
 </html>
