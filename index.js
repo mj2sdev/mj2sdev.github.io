@@ -2,13 +2,15 @@ const app = Vue.createApp({
 	data() {
 		return {
 			day: 0,
-			hour: '00',
-			minute: '00',
-			second: '00',
-			milli: '00',
+			hour: "00",
+			minute: "00",
+			second: "00",
+			milli: "00",
 
 			interval: 0,
 			limit: undefined,
+			selected: false,
+			title: "",
 		}
 	},
 	methods: {
@@ -30,11 +32,19 @@ const app = Vue.createApp({
 			this.second = format(nokori.getUTCSeconds());
 			this.milli = format(milli);
 		},
-	},
-	mounted() {
-		const tick = 10;
-		this.limit = new Date("2025-07-06 10:00:00");
-		this.interval = setInterval(this.setTime, tick);
+		sentaku(event) {
+			const { target } = event;
+			const { tagName, textContent } = target;
+			const { date } = target.dataset;
+			const tick = 10;
+
+			if (tagName != "BUTTON") return;
+
+			this.title = textContent;
+			this.selected = true;
+			this.limit = new Date(date);
+			this.interval = setInterval(this.setTime, tick);
+		}
 	}
 })
 app.mount("body");

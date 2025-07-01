@@ -13,9 +13,20 @@
 </head>
 
 <body>
+  <div class="sentaku" v-if="!selected">
+    <div class="absolute bg-black h-dvh w-full flex items-center justify-center gap-2" @click="sentaku">
+      <button
+        data-date="2025-07-06 10:00:00"
+        class="text-white border rounded-md py-2 px-4 hover:text-black hover:bg-white active:text-white active:bg-black">JLPT</button>
+      <button 
+        data-date="2025-07-19 10:00:00"
+        class="text-white border rounded-md py-2 px-4 hover:text-black hover:bg-white active:text-white active:bg-black">정보처리기사</button>
+    </div>
+  </div>
   <div class="flex flex-col h-dvh text-center justify-center items-center bg-black">
     <div class=" text-red-600 font-monospace font-[monospace] italic text-8xl">
-      <div class="">JLPT 試験<br>受けるまであと</div>
+      <!-- <div class="">JLPT 試験<br>受けるまであと</div> -->
+      <div>{{ title }}<br>시험까지 앞으로</div>
       <div class="flex gap-2">
         <div class="day">{{ day }}</div>
         <div>日</div>
