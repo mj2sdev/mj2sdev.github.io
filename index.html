@@ -31,9 +31,9 @@
         <div class="day">{{ day }}</div>
         <div>日</div>
         <div>{{ hour }}</div>
-        <div class="divider">:</div>
+        <div :class="{ invisible: flicker }">:</div>
         <div>{{ minute }}</div>
-        <div class="divider">:</div>
+        <div :class="{ invisible: flicker }">:</div>
         <div>{{ second }}</div>
         <div>.</div>
         <div>{{ milli }}</div>

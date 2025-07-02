@@ -11,6 +11,7 @@ const app = Vue.createApp({
 			limit: undefined,
 			selected: false,
 			title: "",
+			flicker: false,
 		}
 	},
 	methods: {
@@ -25,6 +26,8 @@ const app = Vue.createApp({
 			const day = Math.floor(nokori / ONE_DAY);
 
 			if (gap < 0) return clearInterval(interval);
+			if (milli < 50) this.flicker = true;
+			else this.flicker = false;
 			
 			this.day = day;
 			this.hour = format(nokori.getUTCHours());
