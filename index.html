@@ -29,7 +29,7 @@
       <div>{{ title }}<br>시험까지 앞으로</div>
       <div class="flex gap-2">
         <div class="day">{{ day }}</div>
-        <div>日</div>
+        <div>일</div>
         <div>{{ hour }}</div>
         <div :class="{ invisible: flicker }">:</div>
         <div>{{ minute }}</div>
@@ -38,6 +38,7 @@
         <div>.</div>
         <div>{{ milli }}</div>
       </div>
+      <div class="text-2xl text-black">{{ advice }}</div>
     </div>
   </div>
 </body>

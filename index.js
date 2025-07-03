@@ -6,6 +6,7 @@ const app = Vue.createApp({
 			minute: "00",
 			second: "00",
 			milli: "00",
+			advice: "",
 
 			interval: 0,
 			limit: undefined,
@@ -47,6 +48,14 @@ const app = Vue.createApp({
 			this.selected = true;
 			this.limit = new Date(date);
 			this.interval = setInterval(this.setTime, tick);
+
+			const advices = [
+				"너 같은게 합격할 리가 없잖아",
+				"그정도 공부해서 되겠어?",
+				"장난 똥때리나?"
+			]
+
+			this.advice = advices[Math.floor(Math.random() * 3)];
 		}
 	}
 })
